@@ -42,6 +42,13 @@ function promptBuy() {
             type: "input",
             message: "Whaddya wanna buy?  Enter ID#.",
             name: "input",
+        },
+
+        // Shout out to Jaysen for helping out here with followup prompts.
+        {
+            type: "input",
+            message: "How many?",
+            name: "input",
         }
     ])
     .then(
@@ -49,26 +56,26 @@ function promptBuy() {
             console.log(response.input);
             
                 connection.query("select * from products where ? item_id='"+ response.input + "'", function (err, res) {
-                    console.log("Searching for:" + response.input);
+                    console.log(response.input);
                     for (var i = 0; i < response.length; i++) {
                         console.log(response[i].id + " |" + response[i].item_id + " |" + response[i].product_name + " |" + response[i].department_name + " |" + response[i].price + " |" + response[i].stock_quantity);
                     }
-                    console.log("You have chosen " + response.input + ".");
+                    console.log("Your quantity is: " + response.input + ".");
                     console.log("--------------------------------");
                 });
             
         }
     )
-    .then(
-        function (quantity){
-            inquirer.prompt([
-                {
-                    type: "input",
-                    message: "How many?",
-                    name: "input",
-                }
-            ])
-        }
-    )
+    // .then(
+    //     function (quantity){
+    //         inquirer.prompt([
+    //             {
+    //                 type: "input",
+    //                 message: "How many?",
+    //                 name: "input",
+    //             }
+    //         ])
+    //     }
+    // )
 }
 
