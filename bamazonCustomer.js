@@ -48,15 +48,27 @@ function promptBuy() {
         function (response){
             console.log(response.input);
             
-                connection.query("select * from products where item_id='"+ response.input + "'", function (err, res) {
+                connection.query("select * from products where ? item_id='"+ response.input + "'", function (err, res) {
                     console.log("Searching for:" + response.input);
                     for (var i = 0; i < response.length; i++) {
                         console.log(response[i].id + " |" + response[i].item_id + " |" + response[i].product_name + " |" + response[i].department_name + " |" + response[i].price + " |" + response[i].stock_quantity);
                     }
-                    // console.log(result);
+                    console.log("You have chosen " + response.input + ".");
                     console.log("--------------------------------");
                 });
             
         }
     )
+    .then(
+        function (quantity){
+            inquirer.prompt([
+                {
+                    type: "input",
+                    message: "How many?",
+                    name: "input",
+                }
+            ])
+        }
+    )
 }
+
