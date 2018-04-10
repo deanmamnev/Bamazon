@@ -62,6 +62,13 @@ function promptBuy() {
                     }
                     console.log("Your quantity is: " + response.input + ".");
                     console.log("--------------------------------");
+
+                    if (response.input <= response[i].stock_quantity) {
+                        console.log("We have enough!  You can buy this!");
+                      }
+                      else{
+                          console.log("We don't have enough. Come back later.")
+                      }
                 });
             
         }
