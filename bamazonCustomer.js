@@ -41,38 +41,44 @@ function promptBuy() {
         {
             type: "input",
             message: "Whaddya wanna buy?  Enter ID#.",
-            name: "input",
+            name: "itemID",
         },
 
         // Shout out to Jaysen for helping out here with followup prompts.
         {
             type: "input",
             message: "How many?",
-            name: "input",
+            name: "quantity",
         }
     ])
-    .then(
-        function (response){
-            console.log(response.input);
-            
-                connection.query("select * from products where ? item_id='"+ response.input + "'", function (err, res) {
+        .then(
+            function (comparison) {
+                console.log(response.input);
+
+                connection.query("select * from products where ? item_id='" + response.input + "'", function (err, res) {
                     console.log(response.input);
                     for (var i = 0; i < response.length; i++) {
+
                         console.log(response[i].id + " |" + response[i].item_id + " |" + response[i].product_name + " |" + response[i].department_name + " |" + response[i].price + " |" + response[i].stock_quantity);
+                        if (response[i].item_id == comparison.itemID) {
+                            var correctItem;
+                            correctItem = response[i];
+                            console.log (correctItem , response[i]);
+                        }
                     }
-                    console.log("Your quantity is: " + response.input + ".");
+                    console.log("Your quantity is: " + response.quanity + ".");
                     console.log("--------------------------------");
 
-                    if (response.input <= response[i].stock_quantity) {
+                    if (correctItem.stock_quantity >= comparison.quanity) {
                         console.log("We have enough!  You can buy this!");
-                      }
-                      else{
-                          console.log("We don't have enough. Come back later.")
-                      }
+                    }
+                    else {
+                        console.log("We don't have enough. Come back later.")
+                    }
                 });
-            
-        }
-    )
+
+            }
+        )
     // .then(
     //     function (quantity){
     //         inquirer.prompt([
