@@ -50,9 +50,10 @@ function promptBuy() {
             
                 connection.query("select * from products where item_id='"+ response.input + "'", function (err, res) {
                     console.log("Searching for:" + response.input);
-                    for (var i = 0; i < res.length; i++) {
-                        console.log(res[i].id + " |" + res[i].item_id + " |" + res[i].product_name + " |" + res[i].department_name + " |" + res[i].price + " |" + res[i].stock_quantity);
+                    for (var i = 0; i < response.length; i++) {
+                        console.log(response[i].id + " |" + response[i].item_id + " |" + response[i].product_name + " |" + response[i].department_name + " |" + response[i].price + " |" + response[i].stock_quantity);
                     }
+                    // console.log(result);
                     console.log("--------------------------------");
                 });
             
