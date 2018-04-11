@@ -53,22 +53,30 @@ function promptBuy() {
     ])
         .then(
             function (comparison) {
-                console.log(response.input);
+                // console.log(res.input);
 
-                connection.query("select * from products where ? item_id='" + response.input + "'", function (err, res) {
-                    console.log(response.input);
-                    for (var i = 0; i < response.length; i++) {
+                // connection.query("select * from products where ? item_id='" + res.input + "'", function (err, res) {
+                //     console.log(res.input);
+                //     for (var i = 0; i < res.length; i++) {
 
-                        console.log(response[i].id + " |" + response[i].item_id + " |" + response[i].product_name + " |" + response[i].department_name + " |" + response[i].price + " |" + response[i].stock_quantity);
-                        if (response[i].item_id == comparison.itemID) {
-                            var correctItem;
-                            correctItem = response[i];
-                            console.log (correctItem , response[i]);
-                        }
-                    }
-                    console.log("Your quantity is: " + response.quanity + ".");
-                    console.log("--------------------------------");
+                //         console.log(res[i].id + " |" + res[i].item_id + " |" + res[i].product_name + " |" + res[i].department_name + " |" + res[i].price + " |" + res[i].stock_quantity);
+                //         if (res[i].item_id == comparison.itemID) {
+                //             var correctItem;
+                //             correctItem = res[i];
+                //             console.log (correctItem , res[i]);
+                //         }
+                //     }
+                //     console.log("Your quantity is: " + response.quanity + ".");
+                //     console.log("--------------------------------");
 
+
+                for (var i = 0; i < res.length; i++){
+                    if (res[i].item_id == comparison.itemID) {
+                                    var correctItem;
+                                    correctItem = res[i];
+                                    console.log (correctItem , res[i]);
+                                }
+                }
                     if (correctItem.stock_quantity >= comparison.quanity) {
                         console.log("We have enough!  You can buy this!");
                     }
